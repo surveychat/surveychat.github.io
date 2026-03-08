@@ -2,8 +2,6 @@
 layout: default
 ---
 
-# 💬 surveychat
-
 `surveychat` is an open-source tool for running chatbot-based surveys and experiments. Participants chat with an AI model, then copy their transcript back into your survey (e.g. Qualtrics). No server setup or coding beyond editing one python file required.
 
 **[View on GitHub](https://github.com/surveychat/surveychat)** · **[Try the demo](https://surveychat.invisible.info)** [passcodes: `ALPHA` (neutral) or `BETA` (empathetic)]
