@@ -1,116 +1,120 @@
-# The Primer theme
+# surveychat
 
-[![.github/workflows/ci.yaml](https://github.com/pages-themes/primer/actions/workflows/ci.yaml/badge.svg)](https://github.com/pages-themes/primer/actions/workflows/ci.yaml) [![Gem Version](https://badge.fury.io/rb/jekyll-theme-primer.svg)](https://badge.fury.io/rb/jekyll-theme-primer)
+`surveychat` is an open-source tool for running chatbot-based surveys and experiments. Participants chat with an AI model, then copy their transcript back into your survey (e.g. Qualtrics). No server setup or coding beyond editing one python file required.
 
-*Primer is a Jekyll theme for GitHub Pages. You can [preview the theme to see what it looks like](http://pages-themes.github.io/primer), or even [use it today](#usage).*
+**[Try the demo](https://surveychat.invisible.info)** [passcodes: `ALPHA` (neutral bot) or `BETA` (empathetic bot)]
 
-![Thumbnail of Primer](thumbnail.png)
+**[View code on GitHub](https://github.com/surveychat/surveychat)**
 
-## Usage
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://raw.githubusercontent.com/surveychat/surveychat/main/paper/surveychat-interface-2.png" alt="Chat interface" style="max-width:100%;" />
+      <br/><em>Participants chat with the AI model</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://raw.githubusercontent.com/surveychat/surveychat/main/paper/surveychat-interface-3.png" alt="Transcript export" style="max-width:100%;" />
+      <br/><em>At the end, they copy their transcript back into your survey (e.g. Qualtrics)</em>
+    </td>
+  </tr>
+</table>
 
-To use the Primer theme:
+<br/>
 
-1. Add the following to your site's `_config.yml`:
+**Contents:** 
+- [Before you start](#before-you-start)
+- [Run locally](#run-locally)
+- [Deploy online](#deploy-online-streamlit-community-cloud)
+- [Need help?](#need-help)
 
-    ```yml
-    remote_theme: pages-themes/primer@v0.6.0
-    plugins:
-    - jekyll-remote-theme # add this line to the plugins list if you already have one
-    ```
+<br/>
 
-2. Optionally, if you'd like to preview your site on your computer, add the following to your site's `Gemfile`:
+## Before you start
 
-    ```ruby
-    gem "github-pages", group: :jekyll_plugins
-    ```
+You will need:
 
-## Customizing
+- **Python 3.10 or newer** - check with `python3 --version` in your terminal. Download from [python.org](https://www.python.org/downloads/) if needed.
+- **An API key** - from a provider such as OpenAI, Azure, or OpenRouter.
+- **A terminal** - Terminal on macOS/Linux, or Command Prompt / PowerShell on Windows.
 
-### Configuration variables
+---
 
-Primer will respect the following variables, if set in your site's `_config.yml`:
+## Run locally
 
-```yml
-title: [The title of your site]
-description: [A short description of your site's purpose]
+Good for testing on your own computer before sharing with participants.
+
+**Step 1: Fork and clone the repo**
+
+Click **Fork** on the [GitHub page](https://github.com/surveychat/surveychat) to create your own copy, then clone it:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/surveychat.git
+cd surveychat
+pip install -r requirements.txt
+cp .env.example .env
 ```
 
-Additionally, you may choose to set the following optional variables:
+> Don't have git? Download it from [git-scm.com](https://git-scm.com/downloads). On macOS it may already be installed - check with `git --version`.
 
-```yml
-show_downloads: ["true" or "false" (unquoted) to indicate whether to provide a download URL]
-google_analytics: [Your Google Analytics tracking ID]
+**Step 2: Add your API key**
+
+Open the `.env` file in any text editor and replace `your-key-here` with your actual API key:
+
+```
+OPENAI_API_KEY=sk-...
 ```
 
-### Stylesheet
+**Step 3: Configure the chatbot**
 
-If you'd like to add your own custom styles:
+Open `app.py` in a text editor. Find the block that starts with:
 
-1. Create a file called `/assets/css/style.scss` in your site
-2. Add the following content to the top of the file, exactly as shown:
-    ```scss
-    ---
-    ---
+```
+# ╔══════════ RESEARCHER CONFIGURATION ═══════════╗
+```
 
-    @import "{{ site.theme }}";
-    ```
-3. Add any custom CSS (or Sass, including imports) you'd like immediately after the `@import` line
+Set `N_CONDITIONS = 1` for a single chatbot (survey mode), or a higher number for an experiment with multiple chatbot versions. Then edit the `CONDITIONS` list to write your chatbot's instructions:
 
-*Note: If you'd like to change the theme's Sass variables, you must set new values before the `@import` line in your stylesheet.*
+```python
+CONDITIONS = [
+    {
+        "name":          "Interview bot",
+        "system_prompt": "You are a friendly research interviewer. Ask one open-ended question at a time about the participant's social media habits. After 5-6 exchanges, thank them and let them know they can click End this chat.",
+        "model":         "gpt-4o",
+    },
+]
+```
 
-### Layouts
+**Step 4: Run the app**
 
-If you'd like to change the theme's HTML layout:
+```bash
+streamlit run app.py
+```
 
-1. For some changes such as a custom `favicon`, you can add custom files in your local `_includes` folder. The files [provided with the theme](https://github.com/pages-themes/primer/tree/master/_includes) provide a starting point and are included by the [original layout template](https://github.com/pages-themes/primer/blob/master/_layouts/default.html).
-2. For more extensive changes, [copy the original template](https://github.com/pages-themes/primer/blob/master/_layouts/default.html) from the theme's repository<br />(*Pro-tip: click "raw" to make copying easier*)
-3. Create a file called `/_layouts/default.html` in your site
-4. Paste the default layout content copied in the first step
-5. Customize the layout as you'd like
+Your browser will open automatically at [http://localhost:8501](http://localhost:8501). This URL only works on your own computer.
 
-### Customizing Google Analytics code
+---
 
-Google has released several iterations to their Google Analytics code over the years since this theme was first created. If you would like to take advantage of the latest code, paste it into `_includes/head-custom-google-analytics.html` in your Jekyll site.
+## Deploy online (Streamlit Community Cloud)
 
-### Overriding GitHub-generated URLs
+This gives you a permanent public URL you can share with participants - free for public repos, no server to manage.
 
-Templates often rely on URLs supplied by GitHub such as links to your repository or links to download your project. If you'd like to override one or more default URLs:
+1. Push your forked repo to GitHub (your `.env` file is automatically excluded from the upload).
+2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with your GitHub account.
+3. Click **Create app**, then select your repo and `app.py` as the main file.
+4. Under **Advanced settings → Secrets**, add your API key exactly as shown:
+   ```
+   OPENAI_API_KEY = "sk-..."
+   ```
+5. Click **Deploy**. You will get a public URL to share with participants.
 
-1. Look at [the template source](https://github.com/pages-themes/primer/blob/master/_layouts/default.html) to determine the name of the variable. It will be in the form of `{{ site.github.zip_url }}`.
-2. Specify the URL that you'd like the template to use in your site's `_config.yml`. For example, if the variable was `site.github.url`, you'd add the following:
-    ```yml
-    github:
-      zip_url: http://example.com/download.zip
-      another_url: another value
-    ```
-3. When your site is built, Jekyll will use the URL you specified, rather than the default one provided by GitHub.
+---
 
-*Note: You must remove the `site.` prefix, and each variable name (after the `github.`) should be indent with two space below `github:`.*
+## Deploy online (other platforms)
 
-For more information, see [the Jekyll variables documentation](https://jekyllrb.com/docs/variables/).
+You can also deploy on platforms like Azure, AWS, or DigitalOcean. The process is different for each platform and may require additional configuration (e.g. for environment variables, dependencies, and web server setup). Refer to the platform's documentation for deploying Streamlit web apps.
 
-## Roadmap
+---
 
-See the [open issues](https://github.com/pages-themes/primer/issues) for a list of proposed features (and known issues).
+## Help and documentation
 
-## Project philosophy
-
-The Primer theme is intended to make it quick and easy for GitHub Pages users to create their first (or 100th) website. The theme should meet the vast majority of users' needs out of the box, erring on the side of simplicity rather than flexibility, and provide users the opportunity to opt-in to additional complexity if they have specific needs or wish to further customize their experience (such as adding custom CSS or modifying the default layout). It should also look great, but that goes without saying.
-
-## Contributing
-
-Interested in contributing to Primer? We'd love your help. Primer is an open source project, built one contribution at a time by users like you. See [the CONTRIBUTING file](docs/CONTRIBUTING.md) for instructions on how to contribute.
-
-### Previewing the theme locally
-
-If you'd like to preview the theme locally (for example, in the process of proposing a change):
-
-1. Clone down the theme's repository (`git clone https://github.com/pages-themes/primer`)
-2. `cd` into the theme's directory
-3. Run `script/bootstrap` to install the necessary dependencies
-4. Run `bundle exec jekyll serve` to start the preview server
-5. Visit [`localhost:4000`](http://localhost:4000) in your browser to preview the theme
-
-### Running tests
-
-The theme contains a minimal test suite, to ensure a site with the theme would build successfully. To run the tests, simply run `script/cibuild`. You'll need to run `script/bootstrap` once before the test script will work.
+See the [full documentation](https://github.com/surveychat/surveychat#readme) on GitHub for configuration options, troubleshooting, and Qualtrics integration.
