@@ -2,122 +2,107 @@
 layout: default
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+# 💬 surveychat
 
-[Link to another page](./another-page.html).
+`surveychat` is an open-source tool for running chatbot-based surveys and experiments. Participants chat with an AI model, then copy their transcript back into your survey (e.g. Qualtrics). No server setup or coding beyond editing one python file required.
 
-There should be whitespace between paragraphs.
+**[View on GitHub](https://github.com/surveychat/surveychat)** · **[Try the demo](https://surveychat.invisible.info)** [passcodes: `ALPHA` (neutral) or `BETA` (empathetic)]
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://raw.githubusercontent.com/surveychat/surveychat/main/paper/surveychat-interface-2.png" alt="Chat interface" style="max-width:100%;" />
+      <br/><em>Participants chat with the AI model</em>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://raw.githubusercontent.com/surveychat/surveychat/main/paper/surveychat-interface-3.png" alt="Transcript export" style="max-width:100%;" />
+      <br/><em>At the end, they copy their transcript back into your survey</em>
+    </td>
+  </tr>
+</table>
 
-# Header 1
+---
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+## Before you start
 
-## Header 2
+You will need:
 
-> This is a blockquote following a header.
->
-> When something is important enough, you do it even if the odds are not in your favor.
+- **Python 3.10 or newer** — check with `python3 --version` in your terminal. Download from [python.org](https://www.python.org/downloads/) if needed.
+- **An API key** — from a provider such as OpenAI, Azure, or OpenRouter.
+- **A terminal** — Terminal on macOS/Linux, or Command Prompt / PowerShell on Windows.
 
-### Header 3
+---
 
-```js
-// Javascript code with syntax highlighting.
-var fun = function lang(l) {
-  dateformat.i18n = require('./lang/' + l)
-  return true;
-}
+## Run locally
+
+Good for testing on your own computer before sharing with participants.
+
+**Step 1 — Fork and clone the repo**
+
+Click **Fork** on the [GitHub page](https://github.com/surveychat/surveychat) to create your own copy, then clone it:
+
+```bash
+git clone https://github.com/YOUR_USERNAME/surveychat.git
+cd surveychat
+pip install -r requirements.txt
+cp .env.example .env
 ```
 
-```ruby
-# Ruby code with syntax highlighting
-GitHubPages::Dependencies.gems.each do |gem, version|
-  s.add_dependency(gem, "= #{version}")
-end
-```
+> Don't have git? Download it from [git-scm.com](https://git-scm.com/downloads). On macOS it may already be installed — check with `git --version`.
 
-#### Header 4
+**Step 2 — Add your API key**
 
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-*   This is an unordered list following a header.
-
-##### Header 5
-
-1.  This is an ordered list following a header.
-2.  This is an ordered list following a header.
-3.  This is an ordered list following a header.
-
-###### Header 6
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-### There's a horizontal rule below this.
-
-* * *
-
-### Here is an unordered list:
-
-*   Item foo
-*   Item bar
-*   Item baz
-*   Item zip
-
-### And an ordered list:
-
-1.  Item one
-1.  Item two
-1.  Item three
-1.  Item four
-
-### And a nested list:
-
-- level 1 item
-  - level 2 item
-  - level 2 item
-    - level 3 item
-    - level 3 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-  - level 2 item
-  - level 2 item
-- level 1 item
-
-### Small image
-
-![Octocat](https://github.githubassets.com/images/icons/emoji/octocat.png)
-
-### Large image
-
-![Branching](https://docs.github.com/assets/images/help/repository/branching.png)
-
-
-### Definition lists can be used with HTML syntax.
-
-<dl>
-<dt>Name</dt>
-<dd>Godzilla</dd>
-<dt>Born</dt>
-<dd>1952</dd>
-<dt>Birthplace</dt>
-<dd>Japan</dd>
-<dt>Color</dt>
-<dd>Green</dd>
-</dl>
+Open the `.env` file in any text editor and replace `your-key-here` with your actual API key:
 
 ```
-Long, single-line code blocks should not wrap. They should horizontally scroll if they are too long. This line should be long enough to demonstrate this.
+OPENAI_API_KEY=sk-...
 ```
 
+**Step 3 — Configure the chatbot**
+
+Open `app.py` in a text editor. Find the block that starts with:
+
 ```
-The final element.
+# ╔══════════ RESEARCHER CONFIGURATION ═══════════╗
 ```
+
+Set `N_CONDITIONS = 1` for a single chatbot (survey mode), or a higher number for an experiment with multiple chatbot versions. Then edit the `CONDITIONS` list to write your chatbot's instructions:
+
+```python
+CONDITIONS = [
+    {
+        "name":          "Interview bot",
+        "system_prompt": "You are a friendly research interviewer. Ask one open-ended question at a time about the participant's social media habits. After 5-6 exchanges, thank them and let them know they can click End this chat.",
+        "model":         "gpt-4o",
+    },
+]
+```
+
+**Step 4 — Run the app**
+
+```bash
+streamlit run app.py
+```
+
+Your browser will open automatically at [http://localhost:8501](http://localhost:8501). This URL only works on your own computer.
+
+---
+
+## Deploy online (Streamlit Community Cloud)
+
+This gives you a permanent public URL you can share with participants — free for public repos, no server to manage.
+
+1. Push your forked repo to GitHub (your `.env` file is automatically excluded from the upload).
+2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with your GitHub account.
+3. Click **Create app**, then select your repo and `app.py` as the main file.
+4. Under **Advanced settings → Secrets**, add your API key exactly as shown:
+   ```
+   OPENAI_API_KEY = "sk-..."
+   ```
+5. Click **Deploy**. You will get a public URL to share with participants.
+
+---
+
+## Need help?
+
+See the [full documentation](https://github.com/surveychat/surveychat#readme) on GitHub for configuration options, troubleshooting, and Qualtrics integration.

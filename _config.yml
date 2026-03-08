@@ -10,11 +10,11 @@ theme: jekyll-theme-primer
 github:
   private: false
   license:
-    name: MIT
+    name: AGPL-3.0
   source:
-    branch: "master"
+    branch: "main"
     path: "/"
-  repository_url: "https://github.com/pages-themes/primer"
-  
-title: Jekyll Theme Primer
-description: Primer is a Jekyll theme for GitHub Pages
+  repository_url: "https://github.com/surveychat/surveychat"
+
+title: surveychat
+description: Open-source chatbot tools for researchers
