@@ -25,7 +25,7 @@
 - [Before you start](#before-you-start)
 - [Run locally](#run-locally)
 - [Deploy online](#deploy-online-streamlit-community-cloud)
-- [Need help?](#need-help)
+- [Help and documentation](#help-and-documentation)
 
 <br/>
 
@@ -37,7 +37,8 @@ You will need:
 - **An API key** - from a provider such as OpenAI, Azure, or OpenRouter.
 - **A terminal** - Terminal on macOS/Linux, or Command Prompt / PowerShell on Windows.
 
----
+
+<br/>
 
 ## Run locally
 
@@ -92,7 +93,7 @@ streamlit run app.py
 
 Your browser will open automatically at [http://localhost:8501](http://localhost:8501). This URL only works on your own computer.
 
----
+<br/>
 
 ## Deploy online (Streamlit Community Cloud)
 
@@ -107,13 +108,13 @@ This gives you a permanent public URL you can share with participants - free for
    ```
 5. Click **Deploy**. You will get a public URL to share with participants.
 
----
+<br/>
 
 ## Deploy online (other platforms)
 
 You can also deploy on platforms like Azure, AWS, or DigitalOcean. The process is different for each platform and may require additional configuration (e.g. for environment variables, dependencies, and web server setup). Refer to the platform's documentation for deploying Streamlit web apps.
 
----
+<br/>
 
 ## Help and documentation
 
