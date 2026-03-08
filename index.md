@@ -104,14 +104,14 @@ Your browser will open automatically at [http://localhost:8501](http://localhost
 
 This gives you a permanent public URL you can share with participants - free for public repos, no server to manage.
 
-1. Push your forked repo to GitHub (your `.env` file is automatically excluded from the upload).
+1. Push your modified repo to GitHub (your `.env` file is automatically excluded from the upload).
 2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with your GitHub account.
 3. Click **Create app**, then select your repo and `app.py` as the main file.
 4. Under **Advanced settings → Secrets**, add your API key exactly as shown:
    ```
    OPENAI_API_KEY = "sk-..."
    ```
-5. Click **Deploy**. You will get a public URL to share with participants.
+5. Click **Deploy**. You will get a public URL to embed inside Qualtrics, or share directly with participants.
 
 <br/>
 
@@ -123,4 +123,4 @@ You can also deploy on platforms like Azure, AWS, or DigitalOcean. The process i
 
 ## Help and documentation
 
-See the [full documentation](https://github.com/surveychat/surveychat#readme) on GitHub for configuration options, troubleshooting, and Qualtrics integration.
+See the [full documentation](https://github.com/surveychat/surveychat#readme) on GitHub for configuration options and troubleshooting.
