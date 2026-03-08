@@ -4,7 +4,9 @@ layout: default
 
 `surveychat` is an open-source tool for running chatbot-based surveys and experiments. Participants chat with an AI model, then copy their transcript back into your survey (e.g. Qualtrics). No server setup or coding beyond editing one python file required.
 
-**[View on GitHub](https://github.com/surveychat/surveychat)** · **[Try the demo](https://surveychat.invisible.info)** [passcodes: `ALPHA` (neutral) or `BETA` (empathetic)]
+**[Try the demo](https://surveychat.invisible.info)** [passcodes: `ALPHA` (neutral bot) or `BETA` (empathetic bot)]
+
+**[View code on GitHub](https://github.com/surveychat/surveychat)**
 
 <table>
   <tr>
@@ -14,20 +16,28 @@ layout: default
     </td>
     <td align="center" width="50%">
       <img src="https://raw.githubusercontent.com/surveychat/surveychat/main/paper/surveychat-interface-3.png" alt="Transcript export" style="max-width:100%;" />
-      <br/><em>At the end, they copy their transcript back into your survey</em>
+      <br/><em>At the end, they copy their transcript back into your survey (e.g. Qualtrics)</em>
     </td>
   </tr>
 </table>
 
----
+<br/>
+
+**Contents:** 
+- [Before you start](#before-you-start)
+- [Run locally](#run-locally)
+- [Deploy online](#deploy-online-streamlit-community-cloud)
+- [Need help?](#need-help)
+
+<br/>
 
 ## Before you start
 
 You will need:
 
-- **Python 3.10 or newer** — check with `python3 --version` in your terminal. Download from [python.org](https://www.python.org/downloads/) if needed.
-- **An API key** — from a provider such as OpenAI, Azure, or OpenRouter.
-- **A terminal** — Terminal on macOS/Linux, or Command Prompt / PowerShell on Windows.
+- **Python 3.10 or newer** - check with `python3 --version` in your terminal. Download from [python.org](https://www.python.org/downloads/) if needed.
+- **An API key** - from a provider such as OpenAI, Azure, or OpenRouter.
+- **A terminal** - Terminal on macOS/Linux, or Command Prompt / PowerShell on Windows.
 
 ---
 
@@ -35,7 +45,7 @@ You will need:
 
 Good for testing on your own computer before sharing with participants.
 
-**Step 1 — Fork and clone the repo**
+**Step 1: Fork and clone the repo**
 
 Click **Fork** on the [GitHub page](https://github.com/surveychat/surveychat) to create your own copy, then clone it:
 
@@ -46,9 +56,9 @@ pip install -r requirements.txt
 cp .env.example .env
 ```
 
-> Don't have git? Download it from [git-scm.com](https://git-scm.com/downloads). On macOS it may already be installed — check with `git --version`.
+> Don't have git? Download it from [git-scm.com](https://git-scm.com/downloads). On macOS it may already be installed - check with `git --version`.
 
-**Step 2 — Add your API key**
+**Step 2: Add your API key**
 
 Open the `.env` file in any text editor and replace `your-key-here` with your actual API key:
 
@@ -56,7 +66,7 @@ Open the `.env` file in any text editor and replace `your-key-here` with your ac
 OPENAI_API_KEY=sk-...
 ```
 
-**Step 3 — Configure the chatbot**
+**Step 3: Configure the chatbot**
 
 Open `app.py` in a text editor. Find the block that starts with:
 
@@ -76,7 +86,7 @@ CONDITIONS = [
 ]
 ```
 
-**Step 4 — Run the app**
+**Step 4: Run the app**
 
 ```bash
 streamlit run app.py
@@ -88,7 +98,7 @@ Your browser will open automatically at [http://localhost:8501](http://localhost
 
 ## Deploy online (Streamlit Community Cloud)
 
-This gives you a permanent public URL you can share with participants — free for public repos, no server to manage.
+This gives you a permanent public URL you can share with participants - free for public repos, no server to manage.
 
 1. Push your forked repo to GitHub (your `.env` file is automatically excluded from the upload).
 2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with your GitHub account.
@@ -101,6 +111,12 @@ This gives you a permanent public URL you can share with participants — free f
 
 ---
 
-## Need help?
+## Deploy online (other platforms)
+
+You can also deploy on platforms like Azure, AWS, or DigitalOcean. The process is different for each platform and may require additional configuration (e.g. for environment variables, dependencies, and web server setup). Refer to the platform's documentation for deploying Streamlit web apps.
+
+---
+
+## Help and documentation
 
 See the [full documentation](https://github.com/surveychat/surveychat#readme) on GitHub for configuration options, troubleshooting, and Qualtrics integration.
