@@ -39,7 +39,7 @@ layout: default
 You will need:
 
 - **Python 3.10 or newer** - check with `python3 --version` in your terminal. Download from [python.org](https://www.python.org/downloads/) if needed.
-- **An API key** - from a provider such as OpenAI, Azure, or OpenRouter.
+- **An API key** - from a provider such as OpenAI, Azure, Hugging Face, or OpenRouter.
 - **A terminal** - Terminal on macOS/Linux, or Command Prompt / PowerShell on Windows.
 
 
