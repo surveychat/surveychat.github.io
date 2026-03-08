@@ -19,7 +19,7 @@ layout: default
     </td>
     <td align="center" width="50%">
       <img src="https://raw.githubusercontent.com/surveychat/surveychat/main/paper/surveychat-interface-3.png" alt="Transcript export" style="max-width:100%;" />
-      <br/><em>At the end, they copy their transcript back into your survey (e.g. Qualtrics)</em>
+      <br/><em>Participants paste their conversation transcript into your survey (e.g., Qualtrics)</em>
     </td>
   </tr>
 </table>
