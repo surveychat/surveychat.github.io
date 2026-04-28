@@ -14,11 +14,11 @@ layout: default
 <table>
   <tr>
     <td align="center" width="50%">
-      <img src="https://raw.githubusercontent.com/surveychat/surveychat/main/paper/surveychat-interface-2.png" alt="Chat interface" style="max-width:100%;" />
+      <img src="https://raw.githubusercontent.com/surveychat/surveychat/9fd3e6405ffb5f6a378f237cccbbcd8be248ab85/paper/surveychat-interface-2.png" alt="Chat interface" style="max-width:100%;" />
       <br/><em>Participants chat with the AI model</em>
     </td>
     <td align="center" width="50%">
-      <img src="https://raw.githubusercontent.com/surveychat/surveychat/main/paper/surveychat-interface-3.png" alt="Transcript export" style="max-width:100%;" />
+      <img src="https://raw.githubusercontent.com/surveychat/surveychat/9fd3e6405ffb5f6a378f237cccbbcd8be248ab85/paper/surveychat-interface-3.png" alt="Transcript export" style="max-width:100%;" />
       <br/><em>Participants paste their conversation transcript into your survey (e.g., Qualtrics)</em>
     </td>
   </tr>
