@@ -4,12 +4,11 @@ layout: default
 
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+<a href="https://github.com/surveychat/surveychat" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-surveychat-181717?logo=github&style=flat" alt="View code on GitHub"/></a>
 
 `surveychat` is an open-source web application that enables researchers to administer surveys and conduct randomized experiments involving large language model (LLM)-based conversational agents, without the need to develop custom web application code. The system supports two primary operational modes: (i) **survey mode**, in which all participants interact with an identical chatbot configuration, and (ii) **experiment mode**, in which participants are randomly assigned to one of multiple chatbot conditions, each defined by a researcher-specified persona and language model. Upon completion of the interaction, participants receive an anonymized JSON transcript that contains only the role, content, and timestamp of each message. This transcript can be copied back into the parent survey platform (such as Qualtrics), within which the chatbot interface itself can also be directly embedded. The frontend of `surveychat` is implemented using Streamlit, and the entire application is configured via a single Python file. The system does not persist conversation data on its server and is compatible with any chat-completions-compatible API endpoint - including locally hosted models - thereby allowing researchers to retain full control over model selection, API usage, data jurisdiction, and adherence to ethical and regulatory requirements.
 
-**<a href="https://surveychat.invisible.info" target="_blank" rel="noopener noreferrer">Try the demo</a>** [passcodes: `ALPHA` (neutral bot) or `BETA` (empathetic bot)]
-
-<a href="https://github.com/surveychat/surveychat" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/GitHub-surveychat-181717?logo=github&style=flat" alt="View code on GitHub"/></a>
+<!-- **<a href="https://surveychat.invisible.info" target="_blank" rel="noopener noreferrer">Try the demo</a>** [passcodes: `ALPHA` (neutral bot) or `BETA` (empathetic bot)] -->
 
 <table>
   <tr>
